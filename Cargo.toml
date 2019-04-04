@@ -1,0 +1,12 @@
+[package]
+name = "rusty-csgo"
+version = "0.1.0"
+authors = ["czapek"]
+
+[lib]
+crate-type = ["cdylib"]
+path = "src/entry_point.rs"
+
+[dependencies]
+winapi = { version = "0.3.7", features = ["consoleapi", "libloaderapi"] }
+chiter = "0.4.0"
