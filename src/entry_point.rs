@@ -17,17 +17,6 @@ fn entry_point() {
     let client = csgo::interfaces::ClientDll::new(memory::get_interface(c_str!("client_panorama.dll"), c_str!("VClient018")));
     let engine = csgo::interfaces::EngineClient::new(memory::get_interface(c_str!("engine.dll"), c_str!("VEngineClient014")));
 
-    let mut client_hook = memory::vmt::Hook::new(memory::get_interface(c_str!("client_panorama.dll"), c_str!("VClient018")) as *mut usize);
-
-    extern "fastcall" fn fsn(ecx: *const usize, edx: *const usize, stage: i32) {
-        // type FsnFn = unsafe extern "fastcall" fn(ecx: *const usize, edx: *const usize, stage: i32);
-        // unsafe { transmute::<_, FsnFn>(client_hook.get_original(37))(ecx, edx, stage); }
-
-        println!("Current frame stage: {}", stage);
-    }
-
-    client_hook.swap(37, unsafe { transmute::<_, usize>(&fsn) });
-
     println!("VClient018::GetAllClasses() = {:?}", client.get_all_classes());
     println!("VEngineClient014::GetLocalPlayer() = {}", engine.get_local_player());
     

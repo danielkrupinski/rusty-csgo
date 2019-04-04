@@ -1,5 +1,3 @@
-pub mod vmt;
-
 use std::mem::transmute;
 use std::ptr::null_mut;
 
